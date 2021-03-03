@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.android.gms.tasks.SuccessContinuation
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -18,6 +20,12 @@ import kotlinx.android.synthetic.main.fragment_add_page.*
 import kotlinx.android.synthetic.main.fragment_edit_text_place.*
 import java.io.IOException
 import java.util.*
+import androidx.annotation.NonNull
+
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.storage.UploadTask
+
 
 class AddPage : Fragment() {
     private val APARTMENT_KEY = "Apartment"
@@ -37,8 +45,12 @@ class AddPage : Fragment() {
                 image_btn.setImageBitmap(bitmap)
 
                 val storageReference = storage.child("images/" + UUID.randomUUID().toString())
-                storageReference.putFile(filePath)
-                photo = storageReference.toString()
+                storageReference.putFile(filePath).addOnSuccessListener {
+                    val result = it.metadata!!.reference!!.downloadUrl
+                    result.addOnSuccessListener { res ->
+                        photo = res.toString()
+                    }
+                }
             }
             catch (e: IOException){
                 Toast.makeText(context, e.message, Toast.LENGTH_SHORT)
@@ -77,7 +89,16 @@ class AddPage : Fragment() {
                     val floor = floor_edit.text.toString().toInt()
                     val price = price_edit.text.toString().toDouble()
                     val owner = FirebaseAuth.getInstance().currentUser!!.email
-                    apartment = Apartment(id!!, address, rooms, square, floor, price, photo, owner!!)
+                    apartment = Apartment(
+                        id!!,
+                        address,
+                        rooms,
+                        square,
+                        floor,
+                        price,
+                        photo,
+                        owner!!
+                    )
 
                     database.child(id).setValue(apartment)
                     Toast.makeText(context, "Объект загружен", Toast.LENGTH_SHORT).show()
@@ -89,7 +110,11 @@ class AddPage : Fragment() {
                 }
             }
             else{
-                Toast.makeText(context, "Проверьте корректность введенных данных", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    "Проверьте корректность введенных данных",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
         }

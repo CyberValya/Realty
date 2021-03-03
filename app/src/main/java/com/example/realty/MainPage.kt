@@ -79,15 +79,16 @@ class MainPage : Fragment() {
     private fun showAllApartments(){
         recycler_view.layoutManager = LinearLayoutManager(context)
         val storage = FirebaseDatabase.getInstance().getReference(APARTMENT_KEY)
+        listOfApartment = ArrayList<Apartment>()
 
         storage.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 for(data in snapshot.children){
                     val item: Apartment = data.getValue(Apartment::class.java) as Apartment
                     listOfApartment.add(item)
-                    Toast.makeText(context, listOfApartment.size.toString(), Toast.LENGTH_SHORT).show()
                 }
-                recycler_view.adapter = RecyclerViewAdapter(listOfApartment)
+                if(recycler_view != null)
+                    recycler_view.adapter = RecyclerViewAdapter(listOfApartment)
             }
 
             override fun onCancelled(error: DatabaseError) {

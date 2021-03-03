@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.FirebaseDatabase
@@ -35,7 +36,7 @@ class RecyclerViewAdapter (private val list: ArrayList<Apartment>) : RecyclerVie
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Picasso.get().load(list[position].photo + ".jpg").into(holder.image)
+        Picasso.get().load(list[position].photo).into(holder.image)
         holder.price?.text = list[position].price.toString()
         holder.address?.text = list[position].address
     }
