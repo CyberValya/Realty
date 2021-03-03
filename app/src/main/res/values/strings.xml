@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Realty</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="object_creation">Создание объекта</string>
+    <string name="object_editing">Редактирование объекта</string>
+    <string name="add">Добавить</string>
+    <string name="save">Сохранить</string>
+    <string name="square">Площадь</string>
+    <string name="price">Цена</string>
+    <string name="rooms">Кол-во комнат</string>
+    <string name="floor">Этаж</string>
+    <string name="address">Адрес</string>
+    <string name="price_per_sm">Цена за кв.м. </string>
+</resources>

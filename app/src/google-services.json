@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "466266263551",
+    "project_id": "realty-38ed5",
+    "storage_bucket": "realty-38ed5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:466266263551:android:bb2ef845ac1c831adbe1ca",
+        "android_client_info": {
+          "package_name": "com.example.realty"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "466266263551-5qvu404p243o88lng0hsmhtlbvahq243.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.realty",
+            "certificate_hash": "a18828faa91c7789593308d63cda0095264509c0"
+          }
+        },
+        {
+          "client_id": "466266263551-ncsnavddunf95sprpuvk39o889e9lko5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtL4onyj6FLgOWWKuuwFbW0PJVhEc2nBA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "466266263551-ncsnavddunf95sprpuvk39o889e9lko5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".EditTextPlace"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/rooms_edit"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:hint="@string/rooms"
+        android:inputType="number"
+        android:textColor="@color/colorBlack"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/square_edit"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:hint="@string/square"
+        android:inputType="number"
+        android:textColor="@color/colorBlack"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/floor_edit"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:hint="@string/floor"
+        android:inputType="number"
+        android:textColor="@color/colorBlack"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/price_edit"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:hint="@string/price"
+        android:inputType="number"
+        android:textColor="@color/colorBlack"
+        android:textSize="20dp" />
+</LinearLayout>

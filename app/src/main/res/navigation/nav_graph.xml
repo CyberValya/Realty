@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainPage">
+
+    <fragment
+        android:id="@+id/mainPage"
+        android:name="com.example.realty.MainPage"
+        android:label="fragment_main_page"
+        tools:layout="@layout/fragment_main_page" >
+        <action
+            android:id="@+id/action_mainPage_to_addPage"
+            app:destination="@id/addPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/objectPage"
+        android:name="com.example.realty.ObjectPage"
+        android:label="fragment_object_page"
+        tools:layout="@layout/fragment_object_page" >
+        <action
+            android:id="@+id/action_objectPage_to_editPage"
+            app:destination="@id/editPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPage"
+        android:name="com.example.realty.AddPage"
+        android:label="fragment_add_page"
+        tools:layout="@layout/fragment_add_page" >
+    </fragment>
+    <fragment
+        android:id="@+id/editPage"
+        android:name="com.example.realty.EditPage"
+        android:label="fragment_edit_page"
+        tools:layout="@layout/fragment_edit_page" >
+    </fragment>
+</navigation>
