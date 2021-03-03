@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -76,22 +77,22 @@ class MainPage : Fragment() {
         }
     }
     private fun showAllApartments(){
+        recycler_view.layoutManager = LinearLayoutManager(context)
         val storage = FirebaseDatabase.getInstance().getReference(APARTMENT_KEY)
 
         storage.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 for(data in snapshot.children){
-                    val item = data.getValue(Apartment::class.java)
-                    listOfApartment.add(item as Apartment)
+                    val item: Apartment = data.getValue(Apartment::class.java) as Apartment
+                    listOfApartment.add(item)
+                    Toast.makeText(context, listOfApartment.size.toString(), Toast.LENGTH_SHORT).show()
                 }
+                recycler_view.adapter = RecyclerViewAdapter(listOfApartment)
             }
 
             override fun onCancelled(error: DatabaseError) {
                 Toast.makeText(context, "error", Toast.LENGTH_SHORT).show()
             }
-
         })
-        Toast.makeText(context, listOfApartment.count().toString(), Toast.LENGTH_SHORT).show()
-        recycler_view.adapter = RecyclerViewAdapter(listOfApartment)
     }
 }

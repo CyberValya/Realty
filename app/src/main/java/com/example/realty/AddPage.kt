@@ -70,7 +70,7 @@ class AddPage : Fragment() {
         add_btn.setOnClickListener{
             if(checkingEdits()){
                 if(!photo.isNullOrEmpty()){
-                    val id = database.key
+                    val id = database.push().key
                     val address = address_edit.text.toString()
                     val rooms = rooms_edit.text.toString().toInt()
                     val square = square_edit.text.toString().toDouble()
@@ -79,7 +79,7 @@ class AddPage : Fragment() {
                     val owner = FirebaseAuth.getInstance().currentUser!!.email
                     apartment = Apartment(id!!, address, rooms, square, floor, price, photo, owner!!)
 
-                    database.push().setValue(apartment)
+                    database.child(id).setValue(apartment)
                     Toast.makeText(context, "Объект загружен", Toast.LENGTH_SHORT).show()
                     it.findNavController().popBackStack()
                     it.findNavController().navigate(R.id.objectPage)
