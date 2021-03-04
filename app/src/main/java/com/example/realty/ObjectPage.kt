@@ -45,7 +45,7 @@ class ObjectPage : Fragment() {
                         if(image_view != null && price_text != null && price_per_sm_text != null && address_text != null &&
                             rooms_text != null && square_text != null && floor_text != null){
                             Picasso.get().load(item.photo).into(image_view)
-                            price_text.text = item.price.toString() + " руб."
+                            price_text.text = getNicePrice(item.price.toString()) + " руб."
                             val pricePerSqM = item.price / item.square
                             price_per_sm_text.text = String.format("%.2f", pricePerSqM) +  " руб./м²"
                             address_text.text = item.address
@@ -71,5 +71,17 @@ class ObjectPage : Fragment() {
             bundle.putString(argumentName, id)
             it.findNavController().navigate(R.id.action_objectPage_to_editPage, bundle)
         }
+    }
+    fun getNicePrice(price: String): String{
+        val reversedPrice = price.reversed()
+        var result = ""
+        var counter = 0;
+        for(letter in reversedPrice.indices){
+            counter++
+            result += letter
+            if(counter % 3 == 0 && counter != reversedPrice.length)
+                result += " "
+        }
+        return result.reversed()
     }
 }

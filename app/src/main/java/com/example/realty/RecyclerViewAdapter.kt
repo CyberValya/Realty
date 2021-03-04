@@ -37,10 +37,9 @@ class RecyclerViewAdapter (private val list: ArrayList<Apartment>) : RecyclerVie
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Picasso.get().load(list[position].photo).into(holder.image)
-        holder.price?.text = list[position].price.toString() + " руб."
+        holder.price?.text = getNicePrice(list[position].price.toString()) + " руб."
         holder.address?.text = list[position].address
         holder.square?.text = String.format("%.2f", list[position].square) + " м²"
-
         holder.itemView.setOnClickListener {
             val bundle = Bundle()
             bundle.putString(argumentName, list[position].id)
@@ -49,5 +48,17 @@ class RecyclerViewAdapter (private val list: ArrayList<Apartment>) : RecyclerVie
     }
     override fun getItemCount(): Int {
         return list.size
+    }
+    private fun getNicePrice(price: String): String{
+        val reversedPrice = price.reversed()
+        var result = ""
+        var counter = 0;
+        for(letter in reversedPrice.indices){
+            counter++
+            result += letter
+            if(counter % 3 == 0 && counter != reversedPrice.length)
+                result += " "
+        }
+        return result.reversed()
     }
 }
