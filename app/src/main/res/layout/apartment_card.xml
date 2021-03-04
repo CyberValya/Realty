@@ -23,7 +23,14 @@
             android:text="@string/price"
             android:textColor="@color/colorBlack"
             android:textSize="25dp" />
-
+        <TextView
+            android:id="@+id/square"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="@string/square"
+            android:textColor="@color/colorGray"
+            android:textSize="20dp" />
         <ImageView
             android:id="@+id/image"
             android:layout_width="300dp"
@@ -32,12 +39,12 @@
             android:layout_marginTop="10dp"
             android:src="@color/colorLightGray"
             android:scaleType="center"/>
-
         <TextView
             android:id="@+id/address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
+            android:layout_marginTop="10dp"
             android:text="@string/address"
             android:textColor="@color/colorGray"
             android:textSize="20dp" />
