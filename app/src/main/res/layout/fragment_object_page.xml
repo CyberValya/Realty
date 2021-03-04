@@ -31,16 +31,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
             android:text="@string/price"
             android:textColor="@color/colorBlack"
-            android:textSize="40dp" />
+            android:textSize="32dp" />
 
         <TextView
             android:id="@+id/price_per_sm_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:text="@string/price_per_sm"
             android:textColor="@color/colorGray"
             android:textSize="20dp" />
@@ -50,7 +51,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:text="@string/address"
             android:textColor="@color/colorGray"
             android:textSize="20dp" />
@@ -65,69 +67,95 @@
         android:layout_marginTop="10dp"
         android:background="@color/colorWhite">
 
-        <TableRow>
+        <TableRow
+            android:layout_marginTop="10dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_gravity="left"
-                android:text="комнат"
-                android:textSize="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
-                android:textColor="@color/colorGray"/>
+                android:text="комнат"
+                android:textColor="@color/colorGray"
+                android:textSize="20dp" />
+
             <TextView
                 android:id="@+id/rooms_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
                 android:layout_gravity="right"
+                android:gravity="right"
                 android:text="....."
                 android:textSize="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="20dp"
-                android:textColor="@color/colorGray"/>
+                android:textColor="@color/colorGray" />
         </TableRow>
-        <TableRow>
+        <TableRow
+            android:layout_marginTop="10dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_gravity="left"
                 android:text="площадь"
                 android:textSize="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
                 android:textColor="@color/colorGray"/>
             <TextView
                 android:id="@+id/square_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
                 android:layout_gravity="right"
+                android:gravity="right"
                 android:text="....."
                 android:textSize="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="20dp"
                 android:textColor="@color/colorGray"/>
         </TableRow>
-        <TableRow>
+        <TableRow
+            android:layout_marginTop="10dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_gravity="left"
                 android:text="этаж"
                 android:textSize="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
                 android:textColor="@color/colorGray"/>
             <TextView
                 android:id="@+id/floor_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
                 android:layout_gravity="right"
+                android:gravity="right"
                 android:text="....."
                 android:textSize="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="20dp"
                 android:textColor="@color/colorGray"/>
         </TableRow>
     </TableLayout>
-
     <Button
         android:id="@+id/edit_btn"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

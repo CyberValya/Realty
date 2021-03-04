@@ -72,14 +72,12 @@ class ObjectPage : Fragment() {
             it.findNavController().navigate(R.id.action_objectPage_to_editPage, bundle)
         }
     }
-    fun getNicePrice(price: String): String{
-        val reversedPrice = price.reversed()
+    fun getNicePrice(_price: String): String{
+        val reversedPrice = _price.reversed()
         var result = ""
-        var counter = 0;
-        for(letter in reversedPrice.indices){
-            counter++
-            result += letter
-            if(counter % 3 == 0 && counter != reversedPrice.length)
+        for(counter in reversedPrice.indices){
+            result += reversedPrice[counter]
+            if((counter + 1) % 3 == 0 && counter != reversedPrice.length - 1)
                 result += " "
         }
         return result.reversed()
