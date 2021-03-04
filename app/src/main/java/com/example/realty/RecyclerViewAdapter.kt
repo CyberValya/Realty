@@ -6,12 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 
 class RecyclerViewAdapter (private val list: ArrayList<Apartment>) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
@@ -37,10 +33,8 @@ class RecyclerViewAdapter (private val list: ArrayList<Apartment>) : RecyclerVie
             R.layout.apartment_card,
             null
         )
-
         return ViewHolder(view)
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Picasso.get().load(list[position].photo).into(holder.image)
         holder.price?.text = list[position].price.toString() + " руб."
@@ -53,7 +47,6 @@ class RecyclerViewAdapter (private val list: ArrayList<Apartment>) : RecyclerVie
             it.findNavController().navigate(R.id.objectPage, bundle)
         }
     }
-
     override fun getItemCount(): Int {
         return list.size
     }

@@ -13,10 +13,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.apartment_card.*
-import kotlinx.android.synthetic.main.fragment_main_page.*
 import kotlinx.android.synthetic.main.fragment_object_page.*
-
 
 class ObjectPage : Fragment() {
     private val APARTMENT_KEY = "Apartment"
@@ -33,7 +30,6 @@ class ObjectPage : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_object_page, container, false)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         id = arguments?.getString(argumentName)

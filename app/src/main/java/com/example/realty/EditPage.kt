@@ -1,19 +1,15 @@
 package com.example.realty
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.firebase.database.*
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.apartment_card.*
-import kotlinx.android.synthetic.main.fragment_add_page.*
 import kotlinx.android.synthetic.main.fragment_edit_page.*
 import kotlinx.android.synthetic.main.fragment_edit_text_place.*
-import kotlinx.android.synthetic.main.fragment_object_page.*
 
 class EditPage : Fragment() {
     private val APARTMENT_KEY = "Apartment"
@@ -32,7 +28,6 @@ class EditPage : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_edit_page, container, false)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         id = arguments?.getString(argumentName)
@@ -73,11 +68,7 @@ class EditPage : Fragment() {
                 it.findNavController().popBackStack()
             }
             else{
-                Toast.makeText(
-                    context,
-                    "Проверьте корректность введенных данных",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(context, "Проверьте корректность введенных данных", Toast.LENGTH_SHORT).show()
             }
             progressBar_edit.visibility = View.INVISIBLE
         }

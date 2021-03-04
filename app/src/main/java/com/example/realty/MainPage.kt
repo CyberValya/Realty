@@ -2,11 +2,9 @@ package com.example.realty
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -19,7 +17,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_main_page.*
-
 
 class MainPage : Fragment() {
     private val SIGN_IN_CODE: Int = 1
@@ -48,15 +45,12 @@ class MainPage : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main_page, container, false)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         if(FirebaseAuth.getInstance().currentUser == null){
             startActivityForResult(
-                AuthUI.getInstance().createSignInIntentBuilder().setIsSmartLockEnabled(
-                    false
-                ).build(), SIGN_IN_CODE
+                AuthUI.getInstance().createSignInIntentBuilder().setIsSmartLockEnabled(false).build(), SIGN_IN_CODE
             )
         }
         else{
@@ -66,9 +60,7 @@ class MainPage : Fragment() {
         logout_btn.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             startActivityForResult(
-                AuthUI.getInstance().createSignInIntentBuilder().setIsSmartLockEnabled(
-                    false
-                ).build(), SIGN_IN_CODE
+                AuthUI.getInstance().createSignInIntentBuilder().setIsSmartLockEnabled(false).build(), SIGN_IN_CODE
             )
         }
 
