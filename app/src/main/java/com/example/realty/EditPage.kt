@@ -55,7 +55,7 @@ class EditPage : Fragment() {
         save_btn.setOnClickListener {
             progressBar_edit.visibility = View.VISIBLE
             if(checkingEdits()){
-                apartment.price = price_edit.text.toString().toDouble()
+                apartment.price = price_edit.text.toString().toInt()
                 apartment.rooms = rooms_edit.text.toString().toInt()
                 apartment.square = square_edit.text.toString().toDouble()
                 apartment.floor = floor_edit.text.toString().toInt()
@@ -77,7 +77,7 @@ class EditPage : Fragment() {
         val roomsCheck = rooms_edit.text.toString().toIntOrNull()
         val squareCheck = square_edit.text.toString().toDoubleOrNull()
         val floorCheck = floor_edit.text.toString().toIntOrNull()
-        val priceCheck = price_edit.text.toString().toDoubleOrNull()
+        val priceCheck = price_edit.text.toString().toIntOrNull()
         return roomsCheck != null && roomsCheck > 0 && squareCheck != null && squareCheck > 0 &&
                 floorCheck != null && floorCheck > 0 && priceCheck != null && priceCheck > 0
     }

@@ -12,7 +12,18 @@
         tools:layout="@layout/fragment_main_page" >
         <action
             android:id="@+id/action_mainPage_to_addPage"
-            app:destination="@id/addPage" />
+            app:destination="@id/addPage"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_mainPage_to_objectPage"
+            app:destination="@id/objectPage"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/objectPage"
@@ -21,7 +32,11 @@
         tools:layout="@layout/fragment_object_page" >
         <action
             android:id="@+id/action_objectPage_to_editPage"
-            app:destination="@id/editPage" />
+            app:destination="@id/editPage"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <argument
             android:name="argumentId"
             app:argType="string" />
@@ -31,6 +46,9 @@
         android:name="com.example.realty.AddPage"
         android:label="fragment_add_page"
         tools:layout="@layout/fragment_add_page" >
+        <action
+            android:id="@+id/action_addPage_to_objectPage"
+            app:destination="@id/objectPage" />
     </fragment>
     <fragment
         android:id="@+id/editPage"

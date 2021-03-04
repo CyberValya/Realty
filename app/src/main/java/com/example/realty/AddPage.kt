@@ -81,7 +81,7 @@ class AddPage : Fragment() {
                     val rooms = rooms_edit.text.toString().toInt()
                     val square = square_edit.text.toString().toDouble()
                     val floor = floor_edit.text.toString().toInt()
-                    val price = price_edit.text.toString().toDouble()
+                    val price = price_edit.text.toString().toInt()
                     val owner = FirebaseAuth.getInstance().currentUser!!.email
                     apartment = Apartment(id!!, address, rooms, square, floor, price, photo, owner!!)
 
@@ -90,7 +90,7 @@ class AddPage : Fragment() {
                     val bundle = Bundle()
                     bundle.putString(argumentName, apartment.id)
                     it.findNavController().popBackStack()
-                    it.findNavController().navigate(R.id.objectPage, bundle)
+                    it.findNavController().navigate(R.id.action_mainPage_to_objectPage, bundle)
                 }
                 else{
                     Toast.makeText(context, "Загрузите фотографию", Toast.LENGTH_SHORT).show()
@@ -109,7 +109,7 @@ class AddPage : Fragment() {
         val roomsCheck = rooms_edit.text.toString().toIntOrNull()
         val squareCheck = square_edit.text.toString().toDoubleOrNull()
         val floorCheck = floor_edit.text.toString().toIntOrNull()
-        val priceCheck = price_edit.text.toString().toDoubleOrNull()
+        val priceCheck = price_edit.text.toString().toIntOrNull()
         return !address_edit.text.toString().isNullOrEmpty() && roomsCheck != null && roomsCheck > 0 &&
                 squareCheck != null && squareCheck > 0 && floorCheck != null && floorCheck > 0 &&
                 priceCheck != null && priceCheck > 0

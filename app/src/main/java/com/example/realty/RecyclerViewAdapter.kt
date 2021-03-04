@@ -39,12 +39,12 @@ class RecyclerViewAdapter (private val list: ArrayList<Apartment>) : RecyclerVie
         Picasso.get().load(list[position].photo).into(holder.image)
         holder.price?.text = list[position].price.toString() + " руб."
         holder.address?.text = list[position].address
-        holder.square?.text = list[position].square.toString() + " м²"
+        holder.square?.text = String.format("%.2f", list[position].square) + " м²"
 
         holder.itemView.setOnClickListener {
             val bundle = Bundle()
             bundle.putString(argumentName, list[position].id)
-            it.findNavController().navigate(R.id.objectPage, bundle)
+            it.findNavController().navigate(R.id.action_mainPage_to_objectPage, bundle)
         }
     }
     override fun getItemCount(): Int {

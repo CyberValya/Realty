@@ -47,11 +47,11 @@ class ObjectPage : Fragment() {
                             Picasso.get().load(item.photo).into(image_view)
                             price_text.text = item.price.toString() + " руб."
                             val pricePerSqM = item.price / item.square
-                            price_per_sm_text.text = pricePerSqM.toString() +  " руб."
+                            price_per_sm_text.text = String.format("%.2f", pricePerSqM) +  " руб./м²"
                             address_text.text = item.address
 
                             rooms_text.text = item.rooms.toString()
-                            square_text.text = item.square.toString() + " м²"
+                            square_text.text = String.format("%.2f", item.square) + " м²"
                             floor_text.text = item.floor.toString()
 
                             if(FirebaseAuth.getInstance().currentUser?.email == item.owner)
@@ -69,7 +69,7 @@ class ObjectPage : Fragment() {
         edit_btn.setOnClickListener{
             val bundle = Bundle()
             bundle.putString(argumentName, id)
-            it.findNavController().navigate(R.id.editPage, bundle)
+            it.findNavController().navigate(R.id.action_objectPage_to_editPage, bundle)
         }
     }
 }
