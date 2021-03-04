@@ -77,6 +77,7 @@ class MainPage : Fragment() {
         }
     }
     private fun showAllApartments(){
+        progressBar_main.visibility = View.VISIBLE
         recycler_view.layoutManager = LinearLayoutManager(context)
         val storage = FirebaseDatabase.getInstance().getReference(APARTMENT_KEY)
         listOfApartment = ArrayList<Apartment>()
@@ -95,5 +96,6 @@ class MainPage : Fragment() {
                 Toast.makeText(context, "error", Toast.LENGTH_SHORT).show()
             }
         })
+        progressBar_main.visibility = View.INVISIBLE
     }
 }

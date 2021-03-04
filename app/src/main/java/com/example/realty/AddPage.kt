@@ -25,6 +25,8 @@ import androidx.annotation.NonNull
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.storage.UploadTask
+import kotlinx.android.synthetic.main.fragment_add_page.add_btn
+import kotlinx.android.synthetic.main.fragment_main_page.*
 
 
 class AddPage : Fragment() {
@@ -72,10 +74,12 @@ class AddPage : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         image_btn.setOnClickListener {
+            progressBar_add.visibility = View.VISIBLE
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_CODE)
+            progressBar_add.visibility = View.INVISIBLE
         }
 
         val database = FirebaseDatabase.getInstance().getReference(APARTMENT_KEY)
