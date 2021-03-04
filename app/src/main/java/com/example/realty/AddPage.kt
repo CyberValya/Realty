@@ -31,6 +31,7 @@ import kotlinx.android.synthetic.main.fragment_main_page.*
 
 class AddPage : Fragment() {
     private val APARTMENT_KEY = "Apartment"
+    private val argumentName = "argumentId"
     private val PICK_IMAGE_CODE = 1001
     private var photo: String = ""
     private lateinit var filePath: Uri
@@ -106,8 +107,10 @@ class AddPage : Fragment() {
 
                     database.child(id).setValue(apartment)
                     Toast.makeText(context, "Объект загружен", Toast.LENGTH_SHORT).show()
+                    val bundle = Bundle()
+                    bundle.putString(argumentName, apartment.id)
                     it.findNavController().popBackStack()
-                    it.findNavController().navigate(R.id.objectPage)
+                    it.findNavController().navigate(R.id.objectPage, bundle)
                 }
                 else{
                     Toast.makeText(context, "Загрузите фотографию", Toast.LENGTH_SHORT).show()

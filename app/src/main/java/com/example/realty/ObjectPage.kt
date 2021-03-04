@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -56,6 +57,9 @@ class ObjectPage : Fragment() {
                             rooms_text.text = item.rooms.toString()
                             square_text.text = item.square.toString() + " м²"
                             floor_text.text = item.floor.toString()
+
+                            if(FirebaseAuth.getInstance().currentUser?.email == item.owner)
+                                edit_btn.visibility = View.VISIBLE
                         }
                     }
                 }
