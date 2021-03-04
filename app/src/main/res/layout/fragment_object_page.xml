@@ -15,7 +15,7 @@
         android:src="@drawable/ic_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:scaleType="center" />
+        android:scaleType="centerCrop" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
