@@ -11,9 +11,7 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_edit_page.*
 import kotlinx.android.synthetic.main.fragment_edit_text_place.*
 
-class EditPage : Fragment() {
-    private val APARTMENT_KEY = "Apartment"
-    private val argumentName = "argumentId"
+class EditPage : Fragment(), MainFunctions {
     lateinit var storage: DatabaseReference
     var id: String? = null
     lateinit var apartment: Apartment
@@ -54,7 +52,7 @@ class EditPage : Fragment() {
 
         save_btn.setOnClickListener {
             progressBar_edit.visibility = View.VISIBLE
-            if(checkingEdits()){
+            if(checkingEdits(rooms_edit.text.toString(), square_edit.text.toString(), floor_edit.text.toString(), price_edit.text.toString())){
                 apartment.price = price_edit.text.toString().toInt()
                 apartment.rooms = rooms_edit.text.toString().toInt()
                 apartment.square = square_edit.text.toString().toDouble()
@@ -72,13 +70,5 @@ class EditPage : Fragment() {
             }
             progressBar_edit.visibility = View.INVISIBLE
         }
-    }
-    private fun checkingEdits(): Boolean{
-        val roomsCheck = rooms_edit.text.toString().toIntOrNull()
-        val squareCheck = square_edit.text.toString().toDoubleOrNull()
-        val floorCheck = floor_edit.text.toString().toIntOrNull()
-        val priceCheck = price_edit.text.toString().toIntOrNull()
-        return roomsCheck != null && roomsCheck > 0 && squareCheck != null && squareCheck > 0 &&
-                floorCheck != null && floorCheck > 0 && priceCheck != null && priceCheck > 0
     }
 }

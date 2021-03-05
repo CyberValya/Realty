@@ -15,9 +15,7 @@ import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_object_page.*
 
-class ObjectPage : Fragment() {
-    private val APARTMENT_KEY = "Apartment"
-    private val argumentName = "argumentId"
+class ObjectPage : Fragment(), MainFunctions {
     var id: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +43,7 @@ class ObjectPage : Fragment() {
                         if(image_view != null && price_text != null && price_per_sm_text != null && address_text != null &&
                             rooms_text != null && square_text != null && floor_text != null){
                             Picasso.get().load(item.photo).into(image_view)
-                            price_text.text = getNicePrice(item.price.toString()) + " руб."
+                            price_text.text = getNicePrice(item.price.toString(), 3) + " руб."
                             val pricePerSqM = item.price / item.square
                             price_per_sm_text.text = String.format("%.2f", pricePerSqM) +  " руб./м²"
                             address_text.text = item.address
@@ -71,15 +69,5 @@ class ObjectPage : Fragment() {
             bundle.putString(argumentName, id)
             it.findNavController().navigate(R.id.action_objectPage_to_editPage, bundle)
         }
-    }
-    fun getNicePrice(_price: String): String{
-        val reversedPrice = _price.reversed()
-        var result = ""
-        for(counter in reversedPrice.indices){
-            result += reversedPrice[counter]
-            if((counter + 1) % 3 == 0 && counter != reversedPrice.length - 1)
-                result += " "
-        }
-        return result.reversed()
     }
 }

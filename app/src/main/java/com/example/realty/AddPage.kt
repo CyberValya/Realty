@@ -19,10 +19,7 @@ import kotlinx.android.synthetic.main.fragment_edit_text_place.*
 import java.io.IOException
 import java.util.*
 
-class AddPage : Fragment() {
-    private val APARTMENT_KEY = "Apartment"
-    private val argumentName = "argumentId"
-    private val PICK_IMAGE_CODE = 1001
+class AddPage : Fragment(), MainFunctions {
     private var photo: String = ""
     private lateinit var filePath: Uri
     lateinit var apartment: Apartment
@@ -74,7 +71,7 @@ class AddPage : Fragment() {
 
         val database = FirebaseDatabase.getInstance().getReference(APARTMENT_KEY)
         add_btn.setOnClickListener{
-            if(checkingEdits()){
+            if(checkingEdits(rooms_edit.text.toString(), square_edit.text.toString(), floor_edit.text.toString(), price_edit.text.toString())){
                 if(!photo.isNullOrEmpty()){
                     val id = database.push().key
                     val address = address_edit.text.toString()
@@ -104,14 +101,5 @@ class AddPage : Fragment() {
                 ).show()
             }
         }
-    }
-    private fun checkingEdits(): Boolean{
-        val roomsCheck = rooms_edit.text.toString().toIntOrNull()
-        val squareCheck = square_edit.text.toString().toDoubleOrNull()
-        val floorCheck = floor_edit.text.toString().toIntOrNull()
-        val priceCheck = price_edit.text.toString().toIntOrNull()
-        return !address_edit.text.toString().isNullOrEmpty() && roomsCheck != null && roomsCheck > 0 &&
-                squareCheck != null && squareCheck > 0 && floorCheck != null && floorCheck > 0 &&
-                priceCheck != null && priceCheck > 0
     }
 }

@@ -18,9 +18,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_main_page.*
 
-class MainPage : Fragment() {
-    private val SIGN_IN_CODE: Int = 1
-    private val APARTMENT_KEY = "Apartment"
+class MainPage : Fragment(), MainFunctions {
     var listOfApartment = ArrayList<Apartment>()
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

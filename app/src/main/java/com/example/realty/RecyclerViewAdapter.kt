@@ -11,7 +11,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
-class RecyclerViewAdapter (private val list: ArrayList<Apartment>) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter (private val list: ArrayList<Apartment>) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>(), MainFunctions {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         var image: ImageView? = null
@@ -27,8 +27,6 @@ class RecyclerViewAdapter (private val list: ArrayList<Apartment>) : RecyclerVie
         }
     }
 
-    private val argumentName = "argumentId"
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(
             R.layout.apartment_card,
@@ -38,7 +36,7 @@ class RecyclerViewAdapter (private val list: ArrayList<Apartment>) : RecyclerVie
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Picasso.get().load(list[position].photo).into(holder.image)
-        holder.price?.text = getNicePrice(list[position].price.toString()) + " руб."
+        holder.price?.text = getNicePrice(list[position].price.toString(), 3) + " руб."
         holder.address?.text = list[position].address
         holder.square?.text = String.format("%.2f", list[position].square) + " м²"
         holder.itemView.setOnClickListener {
@@ -49,15 +47,5 @@ class RecyclerViewAdapter (private val list: ArrayList<Apartment>) : RecyclerVie
     }
     override fun getItemCount(): Int {
         return list.size
-    }
-    fun getNicePrice(_price: String): String{
-        val reversedPrice = _price.reversed()
-        var result = ""
-        for(counter in reversedPrice.indices){
-            result += reversedPrice[counter]
-            if((counter + 1) % 3 == 0 && counter != reversedPrice.length - 1)
-                result += " "
-        }
-        return result.reversed()
     }
 }
