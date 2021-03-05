@@ -18,9 +18,6 @@ import kotlinx.android.synthetic.main.fragment_object_page.*
 class ObjectPage : Fragment(), MainFunctions {
     var id: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

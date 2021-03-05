@@ -17,9 +17,6 @@ class EditPage : Fragment(), MainFunctions {
     var id: String? = null
     lateinit var apartment: Apartment
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
