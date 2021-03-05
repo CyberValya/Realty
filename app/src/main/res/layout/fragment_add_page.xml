@@ -53,7 +53,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="@color/colorLightGray"
-            android:src="@drawable/ic_image" />
+            android:src="@drawable/ic_add_photo" />
     </LinearLayout>
     <Button
         android:id="@+id/add_btn"
