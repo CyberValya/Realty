@@ -8,6 +8,7 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -31,7 +32,7 @@ class AddPage : Fragment(), MainFunctions {
                 data != null && data.data != null){
             filePath = data.data!!
             try{
-                progressBar_add.visibility = View.VISIBLE
+                progressBar_add.visibility = ProgressBar.VISIBLE
                 val bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, filePath)
                 image_btn.setImageBitmap(bitmap)
 
@@ -42,7 +43,7 @@ class AddPage : Fragment(), MainFunctions {
                         photo = res.toString()
                     }
                 }
-                progressBar_add.visibility = View.INVISIBLE
+                progressBar_add.visibility = ProgressBar.INVISIBLE
             }
             catch (e: IOException){
                 Toast.makeText(context, e.message, Toast.LENGTH_SHORT)

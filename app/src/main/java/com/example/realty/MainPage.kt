@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -67,7 +68,7 @@ class MainPage : Fragment(), MainFunctions {
         }
     }
     private fun showAllApartments(){
-        progressBar_main.visibility = View.VISIBLE
+        progressBar_main.visibility = ProgressBar.VISIBLE
         recycler_view.layoutManager = LinearLayoutManager(context)
         val storage = FirebaseDatabase.getInstance().getReference(APARTMENT_KEY)
         listOfApartment = ArrayList<Apartment>()
@@ -86,6 +87,6 @@ class MainPage : Fragment(), MainFunctions {
                 Toast.makeText(context, "error", Toast.LENGTH_SHORT).show()
             }
         })
-        progressBar_main.visibility = View.INVISIBLE
+        progressBar_main.visibility = ProgressBar.INVISIBLE
     }
 }

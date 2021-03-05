@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -51,7 +52,7 @@ class EditPage : Fragment(), MainFunctions {
         })
 
         save_btn.setOnClickListener {
-            progressBar_edit.visibility = View.VISIBLE
+            progressBar_edit.visibility = ProgressBar.VISIBLE
             if(checkingEdits(rooms_edit.text.toString(), square_edit.text.toString(), floor_edit.text.toString(), price_edit.text.toString())){
                 apartment.price = price_edit.text.toString().toInt()
                 apartment.rooms = rooms_edit.text.toString().toInt()
@@ -68,7 +69,7 @@ class EditPage : Fragment(), MainFunctions {
             else{
                 Toast.makeText(context, "Проверьте корректность введенных данных", Toast.LENGTH_SHORT).show()
             }
-            progressBar_edit.visibility = View.INVISIBLE
+            progressBar_edit.visibility = ProgressBar.INVISIBLE
         }
     }
 }
