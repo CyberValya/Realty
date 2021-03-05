@@ -31,6 +31,7 @@ class AddPage : Fragment(), MainFunctions {
                 data != null && data.data != null){
             filePath = data.data!!
             try{
+                progressBar_add.visibility = View.VISIBLE
                 val bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, filePath)
                 image_btn.setImageBitmap(bitmap)
 
@@ -41,6 +42,7 @@ class AddPage : Fragment(), MainFunctions {
                         photo = res.toString()
                     }
                 }
+                progressBar_add.visibility = View.INVISIBLE
             }
             catch (e: IOException){
                 Toast.makeText(context, e.message, Toast.LENGTH_SHORT)
@@ -61,12 +63,10 @@ class AddPage : Fragment(), MainFunctions {
         super.onViewCreated(view, savedInstanceState)
 
         image_btn.setOnClickListener {
-            progressBar_add.visibility = View.VISIBLE
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_CODE)
-            progressBar_add.visibility = View.INVISIBLE
         }
 
         val database = FirebaseDatabase.getInstance().getReference(APARTMENT_KEY)
