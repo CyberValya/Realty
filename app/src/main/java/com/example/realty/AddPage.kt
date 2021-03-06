@@ -70,7 +70,8 @@ class AddPage : Fragment(), MainFunctions {
 
         val database = FirebaseDatabase.getInstance().getReference(APARTMENT_KEY)
         add_btn.setOnClickListener{
-            if(checkingEdits(rooms_edit.text.toString(), square_edit.text.toString(), floor_edit.text.toString(), price_edit.text.toString())){
+            if(checkingEdits(rooms_edit.text.toString(), square_edit.text.toString(), floor_edit.text.toString(), price_edit.text.toString()) &&
+                    !address_edit.text.isNullOrEmpty()){
                 if(!photo.isNullOrEmpty()){
                     val id = database.push().key
                     val address = address_edit.text.toString()
