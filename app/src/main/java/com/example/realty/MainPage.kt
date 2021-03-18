@@ -18,6 +18,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_main_page.*
+import retrofit2.*
+import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.math.roundToInt
 
 class MainPage : Fragment(), MainFunctions {
     var listOfApartment = ArrayList<Apartment>()
@@ -46,6 +49,7 @@ class MainPage : Fragment(), MainFunctions {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getWeather(view)
 
         if(FirebaseAuth.getInstance().currentUser == null){
             startActivityForResult(
@@ -88,5 +92,33 @@ class MainPage : Fragment(), MainFunctions {
             }
         })
         progressBar_main.visibility = ProgressBar.INVISIBLE
+    }
+
+    fun getWeather(view: View){
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://api.openweathermap.org/data/2.5/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val weatherAPI = retrofit.create(WeatherAPI::class.java)
+        val weather : Call<Weather> = weatherAPI.getWeather(city, API_KEY)
+        weather.enqueue(object : Callback<Weather>{
+            override fun onResponse(call: Call<Weather>, response: Response<Weather>) {
+                if(response.code() == 404){
+                    Toast.makeText(context, "Something goes wrong :(", Toast.LENGTH_SHORT).show()
+                }
+                else if(!response.isSuccessful){
+                    Toast.makeText(context, "Something goes wrong :(", Toast.LENGTH_SHORT).show()
+                }
+                val data : Weather? = response.body()
+                val main : Main = data!!.main
+                val temp = (main.temp?.minus(273.15))?.roundToInt()
+                Toast.makeText(context, "Погода в Тюмени сейчас: " + temp.toString() + "°C", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onFailure(call: Call<Weather>, t: Throwable) {
+                Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
+            }
+
+        })
     }
 }
