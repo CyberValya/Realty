@@ -1,5 +1,6 @@
-package com.example.realty
+package com.example.realty.interfaces
 
+import com.example.realty.models.Weather
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

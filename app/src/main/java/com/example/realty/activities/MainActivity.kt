@@ -1,7 +1,8 @@
-package com.example.realty
+package com.example.realty.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.realty.R
 
 class MainActivity : AppCompatActivity() {
 

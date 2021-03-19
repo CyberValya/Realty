@@ -1,4 +1,4 @@
-package com.example.realty
+package com.example.realty.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,9 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.example.realty.models.Apartment
+import com.example.realty.interfaces.MainFunctions
+import com.example.realty.R
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_edit_page.*
 import kotlinx.android.synthetic.main.fragment_edit_text_place.*

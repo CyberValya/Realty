@@ -1,4 +1,4 @@
-package com.example.realty
+package com.example.realty.adapters
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,12 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.realty.models.Apartment
+import com.example.realty.interfaces.MainFunctions
+import com.example.realty.R
 import com.squareup.picasso.Picasso
 
-class RecyclerViewAdapter (private val list: ArrayList<Apartment>) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>(), MainFunctions {
+class RecyclerViewAdapter (private val list: ArrayList<Apartment>) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>(),
+    MainFunctions {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         var image: ImageView? = null

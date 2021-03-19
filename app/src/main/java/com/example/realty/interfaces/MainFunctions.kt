@@ -1,4 +1,4 @@
-package com.example.realty
+package com.example.realty.interfaces
 
 
 interface MainFunctions {

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainPage"
-        android:name="com.example.realty.MainPage"
+        android:name="com.example.realty.fragments.MainPage"
         android:label="fragment_main_page"
         tools:layout="@layout/fragment_main_page" >
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/objectPage"
-        android:name="com.example.realty.ObjectPage"
+        android:name="com.example.realty.fragments.ObjectPage"
         android:label="fragment_object_page"
         tools:layout="@layout/fragment_object_page" >
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/addPage"
-        android:name="com.example.realty.AddPage"
+        android:name="com.example.realty.fragments.AddPage"
         android:label="fragment_add_page"
         tools:layout="@layout/fragment_add_page" >
         <action
@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/editPage"
-        android:name="com.example.realty.EditPage"
+        android:name="com.example.realty.fragments.EditPage"
         android:label="fragment_edit_page"
         tools:layout="@layout/fragment_edit_page" >
         <argument

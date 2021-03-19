@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditPage">
+    tools:context=".fragments.EditPage">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:id="@+id/edit_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:name="com.example.realty.EditTextPlace"
+            android:name="com.example.realty.fragments.EditTextPlace"
             tools:layout="@layout/fragment_edit_text_place"
             android:layout_gravity="center" />
     </LinearLayout>

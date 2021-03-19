@@ -1,4 +1,4 @@
-package com.example.realty
+package com.example.realty.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +11,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.realty.*
+import com.example.realty.adapters.RecyclerViewAdapter
+import com.example.realty.interfaces.MainFunctions
+import com.example.realty.interfaces.WeatherAPI
+import com.example.realty.models.Apartment
+import com.example.realty.models.Main
+import com.example.realty.models.Weather
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot

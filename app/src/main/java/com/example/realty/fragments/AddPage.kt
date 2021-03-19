@@ -1,4 +1,4 @@
-package com.example.realty
+package com.example.realty.fragments
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -12,6 +12,9 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.example.realty.models.Apartment
+import com.example.realty.interfaces.MainFunctions
+import com.example.realty.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage

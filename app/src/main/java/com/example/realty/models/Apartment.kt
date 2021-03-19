@@ -1,4 +1,4 @@
-package com.example.realty
+package com.example.realty.models
 
 class Apartment (var id: String, var address: String, var rooms: Int, var square: Double,
                  var floor: Int, var price: Int, var photo: String, var owner: String) {
