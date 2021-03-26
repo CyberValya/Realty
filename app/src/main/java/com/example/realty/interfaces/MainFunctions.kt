@@ -5,9 +5,9 @@ interface MainFunctions {
     val APARTMENT_KEY : String get() = "Apartment"
     val PICK_IMAGE_CODE: Int get() = 1001
     val SIGN_IN_CODE: Int get() = 1
+    val API_KEY : String get() = "61f81a240d16168f528341490297018f"
     val argumentName : String get() = "argumentId"
     val weatherURL : String get() = "api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}"
-    val API_KEY : String get() = "61f81a240d16168f528341490297018f"
     val city : String get() = "Tyumen"
 
     fun checkingEdits(rooms: String, square: String, floor: String, price: String): Boolean{
