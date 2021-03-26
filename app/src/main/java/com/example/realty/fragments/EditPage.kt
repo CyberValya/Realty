@@ -11,11 +11,16 @@ import androidx.navigation.findNavController
 import com.example.realty.models.Apartment
 import com.example.realty.interfaces.MainFunctions
 import com.example.realty.R
+import com.example.realty.interfaces.EditPageView
+import com.example.realty.presenters.EditPagePresenter
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_edit_page.*
 import kotlinx.android.synthetic.main.fragment_edit_text_place.*
+import moxy.presenter.InjectPresenter
 
-class EditPage : Fragment(), MainFunctions {
+class EditPage : Fragment(), MainFunctions, EditPageView {
+    @InjectPresenter
+    lateinit var ePresenter : EditPagePresenter
     lateinit var storage: DatabaseReference
     var id: String? = null
     lateinit var apartment: Apartment
@@ -38,10 +43,7 @@ class EditPage : Fragment(), MainFunctions {
                     val item: Apartment = data.getValue(Apartment::class.java) as Apartment
                     if (item.id == id) {
                         apartment = item
-                        price_edit.setText("" + item.price)
-                        rooms_edit.setText("" + item.rooms)
-                        square_edit.setText("" + item.square)
-                        floor_edit.setText("" + item.floor)
+                        setText(item)
                     }
                 }
             }
@@ -71,5 +73,11 @@ class EditPage : Fragment(), MainFunctions {
             }
             progressBar_edit.visibility = ProgressBar.INVISIBLE
         }
+    }
+    override fun setText(item: Apartment){
+        price_edit.setText("" + item.price)
+        rooms_edit.setText("" + item.rooms)
+        square_edit.setText("" + item.square)
+        floor_edit.setText("" + item.floor)
     }
 }

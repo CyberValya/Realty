@@ -10,6 +10,8 @@ import androidx.navigation.findNavController
 import com.example.realty.models.Apartment
 import com.example.realty.interfaces.MainFunctions
 import com.example.realty.R
+import com.example.realty.interfaces.ObjectPageView
+import com.example.realty.presenters.ObjectPagePresenter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -17,8 +19,11 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_object_page.*
+import moxy.presenter.InjectPresenter
 
-class ObjectPage : Fragment(), MainFunctions {
+class ObjectPage : Fragment(), MainFunctions, ObjectPageView {
+    @InjectPresenter
+    lateinit var oPresenter : ObjectPagePresenter
     var id: String? = null
 
     override fun onCreateView(
@@ -42,15 +47,7 @@ class ObjectPage : Fragment(), MainFunctions {
                     if(item.id == id){
                         if(image_view != null && price_text != null && price_per_sm_text != null && address_text != null &&
                             rooms_text != null && square_text != null && floor_text != null){
-                            Picasso.get().load(item.photo).into(image_view)
-                            price_text.text = getNicePrice(item.price.toString(), 3) + " руб."
-                            val pricePerSqM = item.price / item.square
-                            price_per_sm_text.text = String.format("%.2f", pricePerSqM) +  " руб./м²"
-                            address_text.text = item.address
-
-                            rooms_text.text = item.rooms.toString()
-                            square_text.text = String.format("%.2f", item.square) + " м²"
-                            floor_text.text = item.floor.toString()
+                            setInformation(item)
 
                             if(FirebaseAuth.getInstance().currentUser?.email == item.owner)
                                 edit_btn.visibility = View.VISIBLE
@@ -69,5 +66,16 @@ class ObjectPage : Fragment(), MainFunctions {
             bundle.putString(argumentName, id)
             it.findNavController().navigate(R.id.action_objectPage_to_editPage, bundle)
         }
+    }
+    override fun setInformation(item: Apartment){
+        Picasso.get().load(item.photo).into(image_view)
+        price_text.text = getNicePrice(item.price.toString(), 3) + " руб."
+        val pricePerSqM = item.price / item.square
+        price_per_sm_text.text = String.format("%.2f", pricePerSqM) +  " руб./м²"
+        address_text.text = item.address
+
+        rooms_text.text = item.rooms.toString()
+        square_text.text = String.format("%.2f", item.square) + " м²"
+        floor_text.text = item.floor.toString()
     }
 }

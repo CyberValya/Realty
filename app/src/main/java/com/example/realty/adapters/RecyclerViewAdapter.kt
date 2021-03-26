@@ -1,19 +1,24 @@
 package com.example.realty.adapters
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.realty.models.Apartment
-import com.example.realty.interfaces.MainFunctions
 import com.example.realty.R
+import com.example.realty.interfaces.MainFunctions
+import com.example.realty.models.Apartment
 import com.squareup.picasso.Picasso
 
-class RecyclerViewAdapter (private val list: ArrayList<Apartment>) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>(),
+
+class RecyclerViewAdapter(
+    private val list: ArrayList<Apartment>
+) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>(),
     MainFunctions {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){

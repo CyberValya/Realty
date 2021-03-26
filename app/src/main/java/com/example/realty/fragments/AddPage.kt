@@ -15,22 +15,27 @@ import androidx.navigation.findNavController
 import com.example.realty.models.Apartment
 import com.example.realty.interfaces.MainFunctions
 import com.example.realty.R
+import com.example.realty.interfaces.AddPageView
+import com.example.realty.presenters.AddPagePresenter
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.fragment_add_page.*
 import kotlinx.android.synthetic.main.fragment_edit_text_place.*
+import moxy.presenter.InjectPresenter
 import java.io.IOException
 import java.util.*
 
-class AddPage : Fragment(), MainFunctions {
+class AddPage : Fragment(), MainFunctions, AddPageView {
+    @InjectPresenter
+    lateinit var aPresenter : AddPagePresenter
     private var photo: String = ""
     private lateinit var filePath: Uri
     lateinit var apartment: Apartment
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        val storage = FirebaseStorage.getInstance().reference
         if(requestCode == PICK_IMAGE_CODE && resultCode == RESULT_OK &&
                 data != null && data.data != null){
             filePath = data.data!!
@@ -39,13 +44,7 @@ class AddPage : Fragment(), MainFunctions {
                 val bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, filePath)
                 image_btn.setImageBitmap(bitmap)
 
-                val storageReference = storage.child("images/" + UUID.randomUUID().toString())
-                storageReference.putFile(filePath).addOnSuccessListener {
-                    val result = it.metadata!!.reference!!.downloadUrl
-                    result.addOnSuccessListener { res ->
-                        photo = res.toString()
-                    }
-                }
+               putInStorage()
                 progressBar_add.visibility = ProgressBar.INVISIBLE
             }
             catch (e: IOException){
@@ -76,16 +75,9 @@ class AddPage : Fragment(), MainFunctions {
             if(checkingEdits(rooms_edit.text.toString(), square_edit.text.toString(), floor_edit.text.toString(), price_edit.text.toString()) &&
                     !address_edit.text.isNullOrEmpty()){
                 if(!photo.isNullOrEmpty()){
-                    val id = database.push().key
-                    val address = address_edit.text.toString()
-                    val rooms = rooms_edit.text.toString().toInt()
-                    val square = square_edit.text.toString().toDouble()
-                    val floor = floor_edit.text.toString().toInt()
-                    val price = price_edit.text.toString().toInt()
-                    val owner = FirebaseAuth.getInstance().currentUser!!.email
-                    apartment = Apartment(id!!, address, rooms, square, floor, price, photo, owner!!)
+                    getApartment(database)
 
-                    database.child(id).setValue(apartment)
+                    database.child(apartment.id).setValue(apartment)
                     Toast.makeText(context, "Объект загружен", Toast.LENGTH_SHORT).show()
                     val bundle = Bundle()
                     bundle.putString(argumentName, apartment.id)
@@ -104,5 +96,25 @@ class AddPage : Fragment(), MainFunctions {
                 ).show()
             }
         }
+    }
+    override fun putInStorage(){
+        val storage = FirebaseStorage.getInstance().reference
+        val storageReference = storage.child("images/" + UUID.randomUUID().toString())
+        storageReference.putFile(filePath).addOnSuccessListener {
+            val result = it.metadata!!.reference!!.downloadUrl
+            result.addOnSuccessListener { res ->
+                photo = res.toString()
+            }
+        }
+    }
+    override fun getApartment(database : DatabaseReference){
+        val id = database.push().key
+        val address = address_edit.text.toString()
+        val rooms = rooms_edit.text.toString().toInt()
+        val square = square_edit.text.toString().toDouble()
+        val floor = floor_edit.text.toString().toInt()
+        val price = price_edit.text.toString().toInt()
+        val owner = FirebaseAuth.getInstance().currentUser!!.email
+        apartment = Apartment(id!!, address, rooms, square, floor, price, photo, owner!!)
     }
 }

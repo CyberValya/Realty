@@ -11,13 +11,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.realty.*
+import com.example.realty.R
 import com.example.realty.adapters.RecyclerViewAdapter
 import com.example.realty.interfaces.MainFunctions
+import com.example.realty.interfaces.MainPageView
 import com.example.realty.interfaces.WeatherAPI
 import com.example.realty.models.Apartment
 import com.example.realty.models.Main
 import com.example.realty.models.Weather
+import com.example.realty.presenters.MainPagePresenter
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -25,27 +27,34 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_main_page.*
-import retrofit2.*
+import moxy.MvpFragment
+import moxy.presenter.InjectPresenter
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import kotlin.math.roundToInt
 
-class MainPage : Fragment(), MainFunctions {
+class MainPage : Fragment(), MainFunctions, MainPageView {
+    @InjectPresenter
+    lateinit var mPresenter : MainPagePresenter
     var listOfApartment = ArrayList<Apartment>()
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == SIGN_IN_CODE){
             if(resultCode == AppCompatActivity.RESULT_OK){
+//                Toast.makeText(activity.applicationContext, "Вы авторизованы!", Toast.LENGTH_SHORT).show()
                 Toast.makeText(context, "Вы авторизованы!", Toast.LENGTH_SHORT).show()
                 showAllApartments()
+
             }
             else{
+//                Toast.makeText(activity.applicationContext, "Вы не авторизованы!", Toast.LENGTH_SHORT).show()
                 Toast.makeText(context, "Вы не авторизованы!", Toast.LENGTH_SHORT).show()
             }
         }
-    }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +65,7 @@ class MainPage : Fragment(), MainFunctions {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getWeather(view)
+        getWeather()
 
         if(FirebaseAuth.getInstance().currentUser == null){
             startActivityForResult(
@@ -78,8 +87,9 @@ class MainPage : Fragment(), MainFunctions {
             it.findNavController().navigate(R.id.action_mainPage_to_addPage)
         }
     }
-    private fun showAllApartments(){
+    override fun showAllApartments(){
         progressBar_main.visibility = ProgressBar.VISIBLE
+//        recycler_view.layoutManager = LinearLayoutManager(activity.applicationContext)
         recycler_view.layoutManager = LinearLayoutManager(context)
         val storage = FirebaseDatabase.getInstance().getReference(APARTMENT_KEY)
         listOfApartment = ArrayList<Apartment>()
@@ -95,13 +105,14 @@ class MainPage : Fragment(), MainFunctions {
             }
 
             override fun onCancelled(error: DatabaseError) {
+//                Toast.makeText(activity.applicationContext, "error", Toast.LENGTH_SHORT).show()
                 Toast.makeText(context, "error", Toast.LENGTH_SHORT).show()
             }
         })
         progressBar_main.visibility = ProgressBar.INVISIBLE
     }
 
-    fun getWeather(view: View){
+    override fun getWeather(){
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.openweathermap.org/data/2.5/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -111,18 +122,22 @@ class MainPage : Fragment(), MainFunctions {
         weather.enqueue(object : Callback<Weather>{
             override fun onResponse(call: Call<Weather>, response: Response<Weather>) {
                 if(response.code() == 404){
+//                    Toast.makeText(activity.applicationContext, "Something goes wrong :(", Toast.LENGTH_SHORT).show()
                     Toast.makeText(context, "Something goes wrong :(", Toast.LENGTH_SHORT).show()
                 }
                 else if(!response.isSuccessful){
+//                    Toast.makeText(activity.applicationContext, "Something goes wrong :(", Toast.LENGTH_SHORT).show()
                     Toast.makeText(context, "Something goes wrong :(", Toast.LENGTH_SHORT).show()
                 }
                 val data : Weather? = response.body()
                 val main : Main = data!!.main
                 val temp = (main.temp?.minus(273.15))?.roundToInt()
+//                Toast.makeText(activity.applicationContext, "Погода в Тюмени сейчас: " + temp.toString() + "°C", Toast.LENGTH_SHORT).show()
                 Toast.makeText(context, "Погода в Тюмени сейчас: " + temp.toString() + "°C", Toast.LENGTH_SHORT).show()
             }
 
             override fun onFailure(call: Call<Weather>, t: Throwable) {
+//                Toast.makeText(activity.applicationContext, t.message, Toast.LENGTH_SHORT).show()
                 Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
             }
 
