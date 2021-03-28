@@ -57,7 +57,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.0-beta01'
 
     //Toothpick
-    implementation 'com.github.stephanenicolas.toothpick:toothpick-runtime:3.1.0'
+    implementation 'com.github.stephanenicolas.toothpick:ktp:3.1.0'
+    kapt 'com.github.stephanenicolas.toothpick:toothpick-compiler:3.1.0'
 
     //Moxy
     implementation "com.github.moxy-community:moxy:2.2.1"
