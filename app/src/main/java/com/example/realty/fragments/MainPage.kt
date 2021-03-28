@@ -45,13 +45,11 @@ class MainPage : Fragment(), MainFunctions, MainPageView {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == SIGN_IN_CODE){
             if(resultCode == AppCompatActivity.RESULT_OK){
-//                Toast.makeText(activity.applicationContext, "Вы авторизованы!", Toast.LENGTH_SHORT).show()
                 Toast.makeText(context, "Вы авторизованы!", Toast.LENGTH_SHORT).show()
                 showAllApartments()
 
             }
             else{
-//                Toast.makeText(activity.applicationContext, "Вы не авторизованы!", Toast.LENGTH_SHORT).show()
                 Toast.makeText(context, "Вы не авторизованы!", Toast.LENGTH_SHORT).show()
             }
         }
@@ -89,7 +87,6 @@ class MainPage : Fragment(), MainFunctions, MainPageView {
     }
     override fun showAllApartments(){
         progressBar_main.visibility = ProgressBar.VISIBLE
-//        recycler_view.layoutManager = LinearLayoutManager(activity.applicationContext)
         recycler_view.layoutManager = LinearLayoutManager(context)
         val storage = FirebaseDatabase.getInstance().getReference(APARTMENT_KEY)
         listOfApartment = ArrayList<Apartment>()
@@ -105,7 +102,6 @@ class MainPage : Fragment(), MainFunctions, MainPageView {
             }
 
             override fun onCancelled(error: DatabaseError) {
-//                Toast.makeText(activity.applicationContext, "error", Toast.LENGTH_SHORT).show()
                 Toast.makeText(context, "error", Toast.LENGTH_SHORT).show()
             }
         })
@@ -122,22 +118,18 @@ class MainPage : Fragment(), MainFunctions, MainPageView {
         weather.enqueue(object : Callback<Weather>{
             override fun onResponse(call: Call<Weather>, response: Response<Weather>) {
                 if(response.code() == 404){
-//                    Toast.makeText(activity.applicationContext, "Something goes wrong :(", Toast.LENGTH_SHORT).show()
                     Toast.makeText(context, "Something goes wrong :(", Toast.LENGTH_SHORT).show()
                 }
                 else if(!response.isSuccessful){
-//                    Toast.makeText(activity.applicationContext, "Something goes wrong :(", Toast.LENGTH_SHORT).show()
                     Toast.makeText(context, "Something goes wrong :(", Toast.LENGTH_SHORT).show()
                 }
                 val data : Weather? = response.body()
                 val main : Main = data!!.main
                 val temp = (main.temp?.minus(273.15))?.roundToInt()
-//                Toast.makeText(activity.applicationContext, "Погода в Тюмени сейчас: " + temp.toString() + "°C", Toast.LENGTH_SHORT).show()
                 Toast.makeText(context, "Погода в Тюмени сейчас: " + temp.toString() + "°C", Toast.LENGTH_SHORT).show()
             }
 
             override fun onFailure(call: Call<Weather>, t: Throwable) {
-//                Toast.makeText(activity.applicationContext, t.message, Toast.LENGTH_SHORT).show()
                 Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
             }
 

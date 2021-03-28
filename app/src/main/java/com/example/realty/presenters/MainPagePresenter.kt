@@ -9,7 +9,6 @@ import javax.inject.Inject
 @InjectViewState
 class MainPagePresenter : MvpPresenter<MainPageView>() {
     init {
-//        viewState.showAllApartments()
         viewState.getWeather()
     }
 }
